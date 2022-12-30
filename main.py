@@ -67,10 +67,8 @@ def deploy():
     app.run(host="0.0.0.0")
 
 
-#cacheThread = threading.Thread(target=cache.cache)
-#appThread = threading.Thread(target=deploy)
+cacheThread = threading.Thread(target=cache.cache)
+appThread = threading.Thread(target=deploy)
 
-#appThread.start()
-#cacheThread.start()
-
-app.run(host="0.0.0.0", debug=True)
+appThread.start()
+cacheThread.start()
