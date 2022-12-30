@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>HySkyAuctions</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.19.0/dist/full.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/css/style.css" rel="stylesheet" type="text/css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+  </head>
+  <body>
+    <div class="navbar bg-base-100">
+      <div class="navbar-start">
+        <div class="dropdown">
+          <label tabindex="0" class="btn btn-ghost btn-circle">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
+            </svg>
+          </label>
+          <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+            <li><a class="btn btn-ghost normal-case text-xl xs:text-xs" href="/">Homepage</a></li>
+            <li><a class="btn btn-ghost normal-case text-xl xs:text-xs" href="/forge">Forge Calculator</a></li>
+            <li><a class="btn btn-ghost normal-case text-xl xs:text-xs" href="/bits">Bits Calculator</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="navbar-center">
+        <a class="btn btn-ghost normal-case text-xl">HySkyAuctions</a>
+      </div>
+      <div class="navbar-end">
+      </div>
+    </div>
+    <div class="hero min-h-screen" style="background-image: url(https://hypixel.net/attachments/2520713/);">
+      <div class="hero-content text-center text-neutral-content">
+        <div>
+          <h1 class="mb-5 text-5xl lg:text-7xl font-bold">HySkyAuctions</h1>
+          <p class="mb-5">Data is cached from the Hypixel API. New auctions may take a few minutes to appear.</p>
+        </div>
+      </div>
+    </div>
+    <h1 class="text-5xl font-bold bg-base-300" style="width: 100vw; padding-top: 2%; text-align: center;">Current Auctions</h1>
+    <div class="my-2 flex sm:flex-row flex-col bg-base-300 justify-center" style="margin: 0; padding: 2%;">
+      <div class="flex flex-row mb-1 sm:mb-0">
+        <div class="relative" style="margin-right: 5%;">
+          <button onclick="clearAuctions(); getAuctions(0); "
+            class="appearance-none rounded h-full block appearance-none w-full bg-base-100 py-2 px-4 pr-8 leading-tight transition-transform active:scale-105">
+            Apply
+          </button>
+        </div>
+        <div class="relative" style="margin-right: 5%;">
+          <select
+            class="appearance-none rounded h-full block appearance-none w-full bg-base-100 py-2 px-4 pr-8 leading-tight" id="type">
+            <option>All</option>
+            <option>BIN</option>
+            <option>Auctions</option>
+          </select>
+          <div
+            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+              <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+            </svg>
+          </div>
+        </div>
+        <div class="relative" style="margin-right: 5%;">
+          <select
+            class="appearance-none h-full rounded block appearance-none w-full bg-base-100 py-2 px-4 pr-8 leading-tight" id="tier">
+            <option>All</option>
+            <option>COMMON</option>
+            <option>UNCOMMON</option>
+            <option>RARE</option>
+            <option>EPIC</option>
+            <option>LEGENDARY</option>
+            <option>MYTHIC</option>
+            <option>DIVINE</option>
+            <option>SPECIAL</option>
+          </select>
+          <div
+            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+              <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="block relative">
+        <span class="h-full absolute inset-y-0 left-0 flex items-center pl-2">
+          <svg viewBox="0 0 24 24" class="h-4 w-4 fill-current bg-base-100">
+            <path
+              d="M10 4a6 6 0 100 12 6 6 0 000-12zm-8 6a8 8 0 1114.32 4.906l5.387 5.387a1 1 0 01-1.414 1.414l-5.387-5.387A8 8 0 012 10z">
+            </path>
+          </svg>
+        </span>
+        <input placeholder="Search" id="query"
+          class="appearance-none rounded block pl-8 pr-6 py-2 w-full bg-base-100 text-sm placeholder-gray-400" />
+      </div>
+    </div>
+    <div class="grid bg-base-300" id="auctionGrid"></div>
+    <div class="bg-base-300 flex justify-center" style="margin: 0; padding-bottom: 2%; width: 100vw; text-align: center;">
+      <div class="btn-group bg-base-100">
+        <button class="btn" onclick="dispPrev()">«</button>
+        <button class="btn" id="current">0 out of 0</button>
+        <button class="btn" onclick="dispNext()">»</button>
+      </div>
+    </div>
+    <script src="/static/js/populate.js"></script>
+    <input type="checkbox" id="my-modal-3" class="modal-toggle" />
+    <div class="modal">
+      <div class="modal-box relative">
+        <label for="my-modal-3" class="btn btn-sm btn-circle absolute right-2 top-2" style="z-index: 100;" onclick="clearData()">✕</label>
+        <div class="card card-side bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h2 class="card-title" id="itemName">Loading...</h2>
+            <p id="auctioneerName">/ah None</p>
+            <p id="itemLore">Loading...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

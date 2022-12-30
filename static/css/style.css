@@ -1,0 +1,49 @@
+* {
+    color: white;
+}
+
+*::-webkit-scrollbar {
+    display: none;
+}
+
+.grid {
+    display: inline-grid;
+    grid-template-columns: 33% 33% 33%;
+    justify-items: center;
+}
+
+.grid .item {
+    margin-bottom: 10%;
+}
+
+.mythic {
+    color: #FF55FF;
+}
+
+.legendary {
+    color: #FFAA00;
+}
+
+.epic {
+    color: #AA00AA;
+}
+
+.rare {
+    color: #5555FF;
+}
+
+.uncommon {
+    color: #55FF55;
+}
+
+.common {
+    color: #FFFFFF;
+}
+
+.divine {
+    color: #55FFFF;
+}
+
+.special {
+    color: #FF5555;
+}
