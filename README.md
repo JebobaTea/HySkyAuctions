@@ -11,4 +11,8 @@ Currently a WIP:
 
 --> 🔨 Improve load speeds
 
+--> 🔨 Fix theming issues
+
+--> 🔨 Make design mobile responsive
+
 Currently not available online.
